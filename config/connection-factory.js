@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 
 const DB_DATABASE = "new_battleship";
 const DB_USER = "root";
-const DB_PASSWORD = "";
+const DB_PASSWORD = "Df310531";
 const DB_CONNECTION = "localhost";
 const DB = "mysql";
 

@@ -28,6 +28,7 @@ Player.init(
       allowNull: false,
       validate: {
         notEmpty: true,
+        isEmail: true,
       },
     },
     password: {

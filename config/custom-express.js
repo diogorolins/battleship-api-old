@@ -1,7 +1,9 @@
 const express = require("express");
 const app = express();
+
 const bodyParser = require("body-parser");
-const exportTables = require("./exportTables");
+const cors = require("cors");
+//const exportTables = require("./exportTables");
 const authRoute = require("../routes/auth");
 const shipsRoute = require("../routes/ships");
 const playersRoute = require("../routes/players");
@@ -11,6 +13,8 @@ const sequelize = ConnectionFactory.getConnection();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(cors());
 
 app.use("/auth", authRoute);
 app.use("/ships", shipsRoute);

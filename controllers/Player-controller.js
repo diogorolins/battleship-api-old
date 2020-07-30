@@ -5,6 +5,11 @@ class PlayerController {
   static createPlayer() {
     return async (req, res) => {
       try {
+        const playerExists = await players.findOne({
+          where: { email: req.body.email },
+        });
+        if (playerExists)
+          return res.status(400).json({ error: "Email já cadastrado" });
         const player = await players.create(req.body);
         player.password = undefined;
         res.location(`players/${player.id}`);
@@ -12,7 +17,7 @@ class PlayerController {
         return res.status(201).json({ player, token });
       } catch (error) {
         console.log(error);
-        return res.status(500).json({ error: "Error creating player." });
+        return res.status(400).json({ error: "Email inválido" });
       }
     };
   }

@@ -9,17 +9,18 @@ class AuthController {
         const { email, password } = req.body;
 
         const player = await Player.findOne({ where: { email } });
-        if (!player) return res.status(400).json({ error: "User not found" });
+        if (!player)
+          return res.status(400).json({ error: "Usuário não encontrado." });
         if (!(await bcrypt.compare(password, player.password)))
-          return res.status(400).json({ error: "Invalid password" });
+          return res.status(400).json({ error: "Senha inválida" });
 
         player.password = undefined;
 
         const token = TokenService.generateToken(player.id);
         res.status(200).json({ player, token });
       } catch (error) {
-        console.log(error.name);
-        return res.status(500).json({ error: "Error creating player." });
+        console.log(error);
+        return res.status(500).json({ error: "Erro ao fazer login." });
       }
     };
   }

@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
-const authConfig = require("../config/auth.json");
+require("dotenv/config");
 
 class TokenService {
   static generateToken(id) {
     console.log(id);
-    return jwt.sign({ id }, authConfig.secret, {
+    return jwt.sign({ id }, process.env.SECRET, {
       expiresIn: 86400000000,
     });
   }
